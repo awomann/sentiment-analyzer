@@ -12,7 +12,7 @@ load_dotenv()
 api_token = os.getenv("HF_TOKEN")
 
 # Hugging Face Inference API endpoint for DistilBERT sentiment analysis model.
-API_URL = "https://api-inference.huggingface.co/models/distilbert/distilbert-base-uncased-finetuned-sst-2-english"
+API_URL = "https://router.huggingface.co/hf-inference/models/distilbert/distilbert-base-uncased-finetuned-sst-2-english"
 
 # Authentication headers sent with every API request to verify identity.
 headers = {
@@ -34,5 +34,6 @@ def analyze_sentiment(text):
     response = requests.post(API_URL, json=payload, headers=headers)
     return response.json()
 
-result = analyze_sentiment()
-print(result)
+result = analyze_sentiment("Python is driving me crazy.")
+print("Sentiment: " + result[0][0]["label"])
+print("Confidence: " + str(round(result[0][0]["score"] * 100, 2)) + "%")
