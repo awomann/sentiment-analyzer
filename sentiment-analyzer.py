@@ -34,6 +34,6 @@ def analyze_sentiment(text):
     response = requests.post(API_URL, json=payload, headers=headers)
     return response.json()
 
-result = analyze_sentiment("Python is driving me crazy.")
+result = analyze_sentiment(input("Enter a statement to analyze: "))
 print("Sentiment: " + result[0][0]["label"])
 print("Confidence: " + str(round(result[0][0]["score"] * 100, 2)) + "%")
